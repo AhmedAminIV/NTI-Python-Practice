@@ -1,5 +1,0 @@
-Hello, this is a sample file.
-It contains multiple lines of text.
-You can use it to practice reading and writing files in Python.
-
-Line 4: Python makes file handling easy!
