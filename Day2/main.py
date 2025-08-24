@@ -301,3 +301,73 @@ db2 = DatabaseConnection()
 print("\nExercise 11")
 print("Database 1 id: ", id(db1))
 print("Database 2 id: ", id(db2))
+
+"""
+Exercise 12: 
+File Manipulation Challenge
+Write a Python script to perform a series of operations on a file named log.txt. 
+Your program must handle the file in three distinct stages, 
+demonstrating your understanding of different file modes and pointer manipulation.
+
+Stage 1: Initial Setup
+Your script must first create log.txt and write the following three lines to it, 
+ensuring the file is clean before you begin the next stages
+Start of log file.
+This is a second line
+End of file.
+
+Stage 2: Read and Insert
+Open log.txt with a single file operation that allows you to read and write. Read the entire content. 
+Without closing the file, use a method to move the file pointer to the end of the second line and then 
+write a new line of text: This is an inserted line.
+
+Stage 3: Append and Read
+Open log.txt with a single file operation that allows you to both append and read. 
+Append a new line: This line was appended at the end. 
+After appending, move the file pointer back to the beginning of the file and read the entire contents.
+Print the content to the console
+
+Stage 4: Overwrite and Verify
+Open log.txt with a single file operation that allows you to overwrite and read.
+Write two completely new lines to the file:
+
+All old content is gone!
+This is the new file.
+
+After writing, read the file and print its contents to the console to 
+verify that the original content was completely replaced.
+"""
+print("\nExercise 12")
+
+# Stage 1: Initial Setup
+with open("log.txt", "w") as f:
+    f.writelines([
+        "Start of log file.\n",
+        "This is a second line\n",
+        "End of file.\n"
+    ])
+
+# Stage 2: Read and Insert
+with open("log.txt", "r+") as f:
+    content = f.read()
+    # Find end of second line
+    second_line_end = content.find("\n", content.find("\n") + 1) + 2
+    f.seek(second_line_end)  # Move pointer after second line
+    f.write("This is an inserted line.\n")
+
+# Stage 3: Append and Read
+with open("log.txt", "a+") as f:
+    f.write("This line was appended at the end.\n")
+    f.seek(0)  # Move pointer back to start
+    content = f.read()
+    print("\n--- Stage 3 Content ---")
+    print(content)
+
+# Stage 4: Overwrite and Verify
+with open("log.txt", "w+") as f:
+    f.write("All old content is gone!\n")
+    f.write("This is the new file.\n")
+    f.seek(0)
+    content = f.read()
+    print("\n--- Stage 4 Content ---")
+    print(content)
